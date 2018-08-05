@@ -163,10 +163,4 @@ public class SimpleMvcInitialize extends SaiSpringMvcInitialize {
         }
     }
 
-    public void init(String configFilePath) {
-        setConfigFilePath(configFilePath);
-        super.init();
-    }
-
-
 }

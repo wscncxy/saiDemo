@@ -1,5 +1,6 @@
 package com.sai.demo.servlet;
 
+import com.sai.demo.service.SaiSpringMvcInitialize;
 import com.sai.demo.service.impl.SimpleMappingViewHandler;
 import com.sai.demo.service.impl.SimpleMvcInitialize;
 import com.sai.demo.service.impl.SimpleRequestMappingHandler;
@@ -15,7 +16,8 @@ public class SaiDispatcherServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        SimpleMvcInitialize.getInitialize().init(config.getInitParameter("contextConfigLocation"));
+        SaiSpringMvcInitialize saiSpringMvcInitialize = SimpleMvcInitialize.getInitialize();
+        saiSpringMvcInitialize.init(config.getInitParameter("contextConfigLocation"));
     }
 
     @Override

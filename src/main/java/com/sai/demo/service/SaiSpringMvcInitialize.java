@@ -20,10 +20,12 @@ public abstract class SaiSpringMvcInitialize {
         this.configFilePath = configFilePath;
     }
 
-    protected void init() {
+    public final void init(String configFilePath) {
         if (!isInitialize) {
             synchronized (this) {
                 if (!isInitialize) {
+                    setConfigFilePath(configFilePath);
+
                     //读取配置
                     doLoadConfig(configFilePath);
 
