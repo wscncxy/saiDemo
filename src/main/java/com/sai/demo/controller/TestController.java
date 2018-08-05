@@ -13,6 +13,11 @@ public class TestController {
 
     @SaiRequestMapping("first")
     public String test(@SaiParam("abc") String abc, @SaiRequestBody String body, HttpServletRequest request) {
-        return "abc:" + abc + "<br/>body:" + body + "<br/>headToken:" + request.getHeader("token");
+        return "the first Controller    abc:" + abc + "<br/>body:" + body + "<br/>headToken:" + request.getHeader("token");
+    }
+
+    @SaiRequestMapping("third")
+    public String third(@SaiParam("test") String abc, @SaiRequestBody String body, HttpServletRequest request) {
+        return "the third Controller    test:" + abc + "<br/>body:" + body + "<br/>headToken:" + request.getHeader("token");
     }
 }

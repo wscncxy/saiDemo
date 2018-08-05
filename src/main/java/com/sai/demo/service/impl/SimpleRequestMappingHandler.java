@@ -73,12 +73,14 @@ public class SimpleRequestMappingHandler extends SaiRequestMappingHandler {
                         String annotationValue = argumentAnnotation.value();
                         if (StringUtils.isNotBlank(annotationValue)) {
                             String[] paramValue = paramsMap.get(annotationValue);
-                            if (List.class.isAssignableFrom(argument)) {
-                                argumentValueArray[argIndex] = Arrays.asList(paramValue);
-                            } else if (argument.isArray()) {
-                                argumentValueArray[argIndex] = paramValue;
-                            } else {
-                                argumentValueArray[argIndex] = paramValue[0];
+                            if (paramValue != null) {
+                                if (List.class.isAssignableFrom(argument)) {
+                                    argumentValueArray[argIndex] = Arrays.asList(paramValue);
+                                } else if (argument.isArray()) {
+                                    argumentValueArray[argIndex] = paramValue;
+                                } else {
+                                    argumentValueArray[argIndex] = paramValue[0];
+                                }
                             }
                         }
                     }
