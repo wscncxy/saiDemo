@@ -12,12 +12,20 @@ import java.util.Map;
 public class GeneratorApplication {
 
     public static void main(String[] args) throws Exception {
-
-        Analysis analysis = new AnalysisMysqlTable("com.sai.openapi",
-                "jdbc:mysql://db.saiarea.com:3307/saiarea?useUnicode=true&characterEncoding=UTF-8&useSSL=false",
+/**
+ * goods_category_info
+ * goods_category_rela
+ * goods_descript444
+ * goods_info
+ * goods_main
+ * goods_specification_rela
+ * specification_info
+ */
+        Analysis analysis = new AnalysisMysqlTable("com.sai.web.area.shopping",
+                "jdbc:mysql://db.saiarea.com:3307/shopping?useUnicode=true&characterEncoding=UTF-8&useSSL=false",
                 "sai",
                 "sai&465412848",
-                "api_router_param");
+                "goods_descript");
 //        Analysis analysis = new AnalysisClass(Banner.class);
         Map<String, Object> dataMap = analysis.analysisIt();
         System.out.println(JSONObject.toJSONString(dataMap));

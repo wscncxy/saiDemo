@@ -42,5 +42,9 @@ public class Constant {
         }
         JDBCTYPEMAPTOJAVATYPE.put("DATETIME","Date");
         JDBCTYPEMAPTOJAVATYPE.put("INT","int");
+        JDBCTYPEMAPTOJAVATYPE.put("TEXT","String");
+        JDBCTYPEMAPTOJAVATYPE.put("BIGINT","BigDecimal");
+        JDBCTYPEMAPTOJAVATYPE.put("MEDIUMTEXT","String");
+
     }
 }

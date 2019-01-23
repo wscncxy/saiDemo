@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${basePackage}.mapper.${modelName}Mapper">
+    <resultMap id="BaseResultMap" type="${basePackage}.domain.${modelName}">
+        <#list fieldList as item>
+            <#if item.columnName == "id">
+                <id column="id" jdbcType="${item.columnDataType}" property="id"/>
+            <#else>
+                <result column="${item.columnName}" jdbcType="${item.columnDataType}" property="${item.fieldKey}"/>
+            </#if>
+        </#list>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <#list fieldList as item>
+          ${item.columnName}<#if item_has_next>,</#if>
+        </#list>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ${tableName}
+        WHERE id = ${"#{"}id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    DELETE FROM ${tableName}
+    WHERE id = ${"#{"}id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="${basePackage}.domain.${modelName}">
+    INSERT INTO ${tableName} (
+        <#list fieldList as item>
+            ${item.columnName}<#if item_has_next>,</#if>
+        </#list>
+    )
+    VALUES (
+        <#list fieldList as item>
+            ${"#{"}${item.fieldKey},jdbcType=${item.columnDataType}}<#if item_has_next>,</#if>
+        </#list>
+    )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="${basePackage}.domain.${modelName}">
+    UPDATE
+      ${tableName}
+    SET
+        <#list fieldList as item>
+          ${item.columnName} = ${"#{"}${item.fieldKey},jdbcType=${item.columnDataType}}<#if item_has_next>,</#if>
+        </#list>
+    WHERE id = ${"#{"}id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="whereCondition">
+        FROM
+          ${tableName}
+        <where>
+            <#list fieldList as item>
+                <#if item.fieldDataType == "String">
+                    <if test="${item.fieldKey} != null and ${item.fieldKey} != ''">
+                        AND ${item.columnName} like CONCAT( ${"#{"}${item.fieldKey},jdbcType=${item.columnDataType}},'%')
+                    </if>
+                <#elseif item.fieldDataType == "DATE" || item.columnDataType == "DATETIME">
+                    <if test="${item.fieldKey} != null">
+                        <![CDATA[ AND ${item.columnName} > ${"#{"}${item.fieldKey},jdbcType=${item.columnDataType}} ]]>
+                    </if>
+                <#else>
+                    <if test="${item.fieldKey} != null">
+                        AND ${item.columnName} = ${"#{"}${item.fieldKey},jdbcType=${item.columnDataType}}
+                    </if>
+                </#if>
+            </#list>
+        </where>
+    </sql>
+
+    <select id="selectList" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+    </select>
+</mapper>
