@@ -1,4 +1,4 @@
-package com.sai.demo.proxy;
+package com.sai.demo.aop;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sai.demo.annotation.proxy.ProxyAnnotation;
@@ -9,16 +9,16 @@ import com.sai.demo.util.ScannerSourceUtils;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class ProxyMain {
+public class AopMain {
 
     public static void main(String[] args) throws Exception{
-        List<ScannerSourceInfo> scannerSourceInfoList = new ScannerSourceUtils().doScannerSource("com.sai.demo.proxy");
+        List<ScannerSourceInfo> scannerSourceInfoList = new ScannerSourceUtils().doScannerSource("com.sai.demo.aop");
 
         System.out.println("扫描到的包");
         System.out.println(JSONObject.toJSONString(scannerSourceInfoList));
 
         Set<String> proxyClassNameList = new HashSet<>();
-        Map<String, Map<String, ProxyInfo>> proxyServiceMap = new HashMap<>();
+        Map<String, Map<String, AopInfo>> proxyServiceMap = new HashMap<>();
         Map<String, Object> proxySerivceMap = new HashMap<>();
         for(ScannerSourceInfo scannerSourceInfo:scannerSourceInfoList){
             Class cla= scannerSourceInfo.getCla();
@@ -46,22 +46,22 @@ public class ProxyMain {
                         proxyClassNameList.add(proxyClass.replaceFirst("\\.",""));
 
                         String position=proxyMethodAnnotation.position();
-                        Map<String, ProxyInfo> proxyMap = proxyServiceMap.get(position);
+                        Map<String, AopInfo> proxyMap = proxyServiceMap.get(position);
                         if(proxyMap==null){
                             proxyMap = new HashMap();
                         }
-                        ProxyInfo proxyInfo = new ProxyInfo();
+                        AopInfo aopInfo = new AopInfo();
                         Object claObj = proxySerivceMap.get(cla.getName());
                         if(claObj==null){
                             claObj = cla.newInstance();
                             proxySerivceMap.put(cla.getName(),claObj);
                         }
 
-                        proxyInfo.setProxyClass(claObj);
-                        proxyInfo.setProxyMethod(method);
+                        aopInfo.setProxyClass(claObj);
+                        aopInfo.setProxyMethod(method);
 
                         proxyMap.remove(targetMethodName);
-                        proxyMap.put(targetMethodName,proxyInfo);
+                        proxyMap.put(targetMethodName, aopInfo);
 
                         proxyServiceMap.remove(position);
                         proxyServiceMap.put(position,proxyMap);
@@ -77,7 +77,7 @@ public class ProxyMain {
         System.out.println("代理MAP");
         System.out.println(JSONObject.toJSONString(proxyClassNameList));
 
-        ITestItem testItem=(ITestItem)(new ProxyFactory(proxyServiceMap,new TestItem()).getProxyInstance());
+        ITestItem testItem=(ITestItem)(new AopFactory(proxyServiceMap,new TestItem()).getProxyInstance());
 
         System.out.println("");
         System.out.println("");

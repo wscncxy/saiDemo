@@ -1,4 +1,4 @@
-package com.sai.demo.proxy;
+package com.sai.demo.aop;
 
 public class TestItem implements ITestItem {
     @Override

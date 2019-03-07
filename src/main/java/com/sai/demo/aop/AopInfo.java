@@ -1,9 +1,8 @@
-package com.sai.demo.proxy;
+package com.sai.demo.aop;
 
 import java.lang.reflect.Method;
-import java.util.Map;
 
-public class ProxyInfo {
+public class AopInfo {
     private Object proxyClass;
     private Method proxyMethod;
     private Object[] args;

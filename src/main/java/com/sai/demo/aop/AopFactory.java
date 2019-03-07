@@ -1,6 +1,4 @@
-package com.sai.demo.proxy;
-
-import com.alibaba.fastjson.JSONObject;
+package com.sai.demo.aop;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -8,13 +6,13 @@ import java.lang.reflect.Proxy;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ProxyFactory {
+public class AopFactory {
 
     private final Object proxyItem;
-    private final Map<String, Map<String, ProxyInfo>> proxyServiceMap;
+    private final Map<String, Map<String, AopInfo>> proxyServiceMap;
 
-    public ProxyFactory(Map<String, Map<String, ProxyInfo>> proxyServiceMap,
-                        Object proxyItem) {
+    public AopFactory(Map<String, Map<String, AopInfo>> proxyServiceMap,
+                      Object proxyItem) {
         this.proxyServiceMap = proxyServiceMap;
         this.proxyItem = proxyItem;
 
@@ -30,14 +28,14 @@ public class ProxyFactory {
                         String className = proxyItem.getClass().getName();
                         String methodName = method.getName();
                         //前置代理
-                        Map<String, ProxyInfo> preProxy = proxyServiceMap.get("pre");
+                        Map<String, AopInfo> preProxy = proxyServiceMap.get("pre");
                         excProxyMethod(preProxy, className, methodName);
 
                         //执行目标对象方法
                         Object returnValue = method.invoke(proxyItem, args);
 
                         //后置代理
-                        Map<String, ProxyInfo> afterProxy = proxyServiceMap.get("after");
+                        Map<String, AopInfo> afterProxy = proxyServiceMap.get("after");
                         excProxyMethod(afterProxy, className, methodName);
 
                         return returnValue;
@@ -46,17 +44,17 @@ public class ProxyFactory {
         );
     }
 
-    private void excProxyMethod(Map<String, ProxyInfo> proxy, String className, String methodName) {
+    private void excProxyMethod(Map<String, AopInfo> proxy, String className, String methodName) {
         if (proxy != null) {
-            Iterator<Map.Entry<String, ProxyInfo>> iterator = proxy.entrySet().iterator();
+            Iterator<Map.Entry<String, AopInfo>> iterator = proxy.entrySet().iterator();
             while (iterator.hasNext()) {
-                Map.Entry<String, ProxyInfo> preProxyEntry = iterator.next();
+                Map.Entry<String, AopInfo> preProxyEntry = iterator.next();
                 String matchMethodPath = preProxyEntry.getKey();
                 if (matchMethodPath.startsWith(className)) {
                     if (matchMethodPath.endsWith("*") || matchMethodPath.endsWith(methodName)) {
-                        ProxyInfo proxyInfo = preProxyEntry.getValue();
+                        AopInfo aopInfo = preProxyEntry.getValue();
                         try {
-                            proxyInfo.getProxyMethod().invoke(proxyInfo.getProxyClass(), proxyInfo.getArgs());
+                            aopInfo.getProxyMethod().invoke(aopInfo.getProxyClass(), aopInfo.getArgs());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
