@@ -1,7 +1,5 @@
 package ${basePackage}.domain;
 
-import lombok.Data;
-
 import com.sai.web.diamond.BaseDO;
 import lombok.Getter;
 import lombok.Setter;

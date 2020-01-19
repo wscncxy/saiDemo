@@ -2,6 +2,8 @@ package com.sai.demo.generator.constants;
 
 import lombok.AllArgsConstructor;
 
+import java.sql.JDBCType;
+
 
 @AllArgsConstructor
 public enum JDBCDataTypeEnum {

@@ -1,11 +1,14 @@
 package ${basePackage}.domain;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 import com.sai.web.dto.ReqBaseDTO;
 import lombok.Getter;
 import lombok.Setter;
+<#list fieldDateTypeFullNameList as item>
+        <#if item?? && item!="">
+import ${item};
+</#if>
+</#list>
 
 @Setter
 @Getter

@@ -3,17 +3,8 @@ package ${basePackage}.mapper;
 import ${basePackage}.domain.${modelName}DO;
 import ${basePackage}.dto.${modelName}ReqDTO;
 
-import java.util.List;
-import java.util.Map;
-import java.math.BigDecimal;
+import com.sai.web.mapper.BaseMapper;
 
-public interface ${modelName}Mapper {
+public interface ${modelName}Mapper  extends BaseMapper<${modelName}DO, ${modelName}ReqDTO>{
 
-    int insert(${modelName}DO ${modelSmallName});
-
-    ${modelName}DO selectByPrimaryKey(BigDecimal id);
-
-    int updateByPrimaryKey(${modelName}DO ${modelSmallName});
-
-    List<${modelName}DO> selectList(Map<String, Object> param);
 }

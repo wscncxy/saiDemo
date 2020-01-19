@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${basePackage}.mapper.${modelName}Mapper">
-    <resultMap id="BaseResultMap" type="${basePackage}.domain.${modelName}">
+    <resultMap id="BaseResultMap" type="${basePackage}.domain.${modelName}DO">
         <#list fieldList as item>
             <#if item.columnName == "id">
                 <id column="id" jdbcType="${item.columnDataType}" property="id"/>
@@ -26,7 +26,7 @@
     DELETE FROM ${tableName}
     WHERE id = ${"#{"}id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="${basePackage}.domain.${modelName}">
+    <insert id="insert" parameterType="${basePackage}.domain.${modelName}DO">
     INSERT INTO ${tableName} (
         <#list fieldList as item>
             ${item.columnName}<#if item_has_next>,</#if>
@@ -38,7 +38,7 @@
         </#list>
     )
   </insert>
-    <update id="updateByPrimaryKey" parameterType="${basePackage}.domain.${modelName}">
+    <update id="updateByPrimaryKey" parameterType="${basePackage}.domain.${modelName}DO">
     UPDATE
       ${tableName}
     SET
@@ -70,7 +70,7 @@
         </where>
     </sql>
 
-    <select id="selectList" parameterType="Map" resultMap="BaseResultMap">
+    <select id="selectList" parameterType="${basePackage}.dto.${modelName}ReqDTO" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         <include refid="whereCondition"/>

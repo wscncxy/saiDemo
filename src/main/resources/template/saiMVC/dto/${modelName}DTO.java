@@ -1,15 +1,17 @@
 package ${basePackage}.domain;
 
-import lombok.Data;
-
-import java.math.BigDecimal;
-import com.sai.web.diamond.BaseDO;
+import com.sai.web.dto.BaseDTO;
 import lombok.Getter;
 import lombok.Setter;
+<#list fieldDateTypeFullNameList as item>
+        <#if item?? && item!="">
+import ${item};
+</#if>
+</#list>
 
 @Setter
 @Getter
-public class ${modelName}DTO extends BaseDO{
+public class ${modelName}DTO extends BaseDTO{
 
     public ${modelName}DTO(){}
 

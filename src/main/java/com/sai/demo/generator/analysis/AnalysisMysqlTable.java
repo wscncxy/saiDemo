@@ -79,7 +79,8 @@ public class AnalysisMysqlTable implements Analysis {
                 if (columnDataType.indexOf("(") > 0) {
                     columnDataType = columnDataType.substring(0, columnDataType.indexOf("("));
                 }
-                dataBaseFiedInfoMap.put("columnDataType", columnDataType.toUpperCase());
+                columnDataType = columnDataType.toUpperCase();
+                dataBaseFiedInfoMap.put("columnDataType", "TEXT".equalsIgnoreCase(columnDataType)?"VARCHAR":("DATETIME".equalsIgnoreCase(columnDataType)?"TIMESTAMP":columnDataType));
 
                 String fieldName = columnName;
                 String[] fieldNameArray = columnName.split("_");
