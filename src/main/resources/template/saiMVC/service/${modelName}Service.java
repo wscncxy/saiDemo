@@ -5,6 +5,6 @@ import ${basePackage}.domain.${modelName};
 
 import java.util.List;
 
-public interface ${modelName}Service extends PageService<${modelName}>{
+public interface ${modelName}Service extends PageService<${modelName}ReqDTO, ${modelName}DTO, ${modelName}EditDTO>{
 
 }

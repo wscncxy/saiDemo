@@ -1,50 +1,15 @@
 package com.sai.demo.generator.constants;
 
 
-import com.sai.demo.util.StringUtils;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 public class Constant {
-    public static Map<String, String> JAVATYPETOJDBCTYPEMAP = new HashMap<>();
-    public static Map<String, String> JDBCTYPEMAPTOJAVATYPE = new HashMap<>();
-    public static Map<String, String> MYSQLTYPETOJDBCTYPEMAP = new HashMap<>();
 
-    static {
-        JAVATYPETOJDBCTYPEMAP.put("int", "INTEGER");
-        JAVATYPETOJDBCTYPEMAP.put("Integer", "INTEGER");
-        JAVATYPETOJDBCTYPEMAP.put("long", "BIGINT");
-        JAVATYPETOJDBCTYPEMAP.put("Long", "BIGINT");
-        JAVATYPETOJDBCTYPEMAP.put("String", "VARCHAR");
-        JAVATYPETOJDBCTYPEMAP.put("Date", "TIMESTAMP");
-        JAVATYPETOJDBCTYPEMAP.put("Timestamp  ", "TIMESTAMP");
-        JAVATYPETOJDBCTYPEMAP.put("BigDecimal", "DECIMAL");
-        JAVATYPETOJDBCTYPEMAP.put("boolean", "BIT");
-        JAVATYPETOJDBCTYPEMAP.put("Boolean", "BIT");
-        JAVATYPETOJDBCTYPEMAP.put("byte", "TINYINT");
-        JAVATYPETOJDBCTYPEMAP.put("Byte", "TINYINT");
-        JAVATYPETOJDBCTYPEMAP.put("short", "SMALLINT");
-        JAVATYPETOJDBCTYPEMAP.put("double", "DOUBLE");
-        JAVATYPETOJDBCTYPEMAP.put("Double", "DOUBLE");
-        JAVATYPETOJDBCTYPEMAP.put("float", "FLOAT");
-        JAVATYPETOJDBCTYPEMAP.put("Float", "FLOAT");
-
-        MYSQLTYPETOJDBCTYPEMAP.put("int","INTEGER");
-        MYSQLTYPETOJDBCTYPEMAP.put("INT","INTEGER");
-        MYSQLTYPETOJDBCTYPEMAP.put("BIG","INTEGER");
-
-        Iterator<Map.Entry<String, String>> entryIterator = JAVATYPETOJDBCTYPEMAP.entrySet().iterator();
-        while (entryIterator.hasNext()) {
-            Map.Entry<String, String> entry = entryIterator.next();
-            JDBCTYPEMAPTOJAVATYPE.put(entry.getValue(), StringUtils.firstToUp(entry.getKey()));
-        }
-        JDBCTYPEMAPTOJAVATYPE.put("DATETIME","Date");
-        JDBCTYPEMAPTOJAVATYPE.put("INT","int");
-        JDBCTYPEMAPTOJAVATYPE.put("TEXT","String");
-        JDBCTYPEMAPTOJAVATYPE.put("BIGINT","BigDecimal");
-        JDBCTYPEMAPTOJAVATYPE.put("MEDIUMTEXT","String");
-
-    }
+    public final static String GENERAT_PARAM_FIELD_FIRST_UP_KEY = "fieldUpKey";//字段首字母大写
+    public final static String GENERAT_PARAM_FIELD_KEY = "fieldKey";//字段名
+    public final static String GENERAT_PARAM_FIELD_DATA_TYPE = "fieldDataType";//字段类型
+    public final static String GENERAT_PARAM_FIELD_DATA_TYPE_FULL_NAME_LIST = "fieldDateTypeFullNameList";//字段类型全名
+    public final static String GENERAT_PARAM_FIELD_LIST = "fieldList";//字段列表
+    public final static String GENERAT_PARAM_BASE_PACKAGE = "basePackage";//包名
+    public final static String GENERAT_PARAM_TABLE_NAME = "tableName";//表名
+    public final static String GENERAT_PARAM_MODE_NAME = "modelName";//模块名首字母大写
+    public final static String GENERAT_PARAM_MODEL_SMALL_NAME = "modelSmallName";//模块首字母
 }

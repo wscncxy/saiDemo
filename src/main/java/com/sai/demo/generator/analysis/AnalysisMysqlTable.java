@@ -2,17 +2,18 @@ package com.sai.demo.generator.analysis;
 
 
 import com.sai.demo.generator.constants.Constant;
+import com.sai.demo.generator.constants.JavaDataTypeEnum;
+import com.sai.demo.generator.constants.JDBCDataTypeEnum;
 import com.sai.demo.util.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+@Slf4j
 public class AnalysisMysqlTable implements Analysis {
 
     private String dbUrl;
@@ -32,8 +33,8 @@ public class AnalysisMysqlTable implements Analysis {
     @Override
     public Map<String, Object> analysisIt() {
         Map<String, Object> modelTemplateDate = new HashMap<>();
-        modelTemplateDate.put("basePackage", basePackage);
-        modelTemplateDate.put("tableName", tableName);
+        modelTemplateDate.put(Constant.GENERAT_PARAM_BASE_PACKAGE, basePackage);
+        modelTemplateDate.put(Constant.GENERAT_PARAM_TABLE_NAME, tableName);
 
         String modelName = tableName;
         String[] tableNameArray = tableName.split("_");
@@ -43,8 +44,8 @@ public class AnalysisMysqlTable implements Analysis {
                 modelName += StringUtils.firstToUp(tableNameArray[i]);
             }
         }
-        modelTemplateDate.put("modelName", StringUtils.firstToUp(modelName));
-        modelTemplateDate.put("modelSmallName", StringUtils.firstToLower(modelName));
+        modelTemplateDate.put(Constant.GENERAT_PARAM_MODE_NAME, StringUtils.firstToUp(modelName));
+        modelTemplateDate.put(Constant.GENERAT_PARAM_MODEL_SMALL_NAME, StringUtils.firstToLower(modelName));
 
         Connection connection = null;
         Statement statement = null;
@@ -54,10 +55,11 @@ public class AnalysisMysqlTable implements Analysis {
             connection = DriverManager.getConnection(dbUrl, user, pwd);
             statement = connection.createStatement();
             resultSet = statement.executeQuery("desc " + tableName);
-            List<Map<String, Object>> dataBaseFiedsList = new ArrayList<>();
+            List<Map<String, String>> dataBaseFiedsList = new ArrayList<>();
+            Set<String> fieldDateTypeFullNameList = new HashSet<>();
             boolean hasComment = true;
             while (resultSet.next()) {
-                Map<String, Object> dataBaseFiedInfoMap = new HashMap<>();
+                Map<String, String> dataBaseFiedInfoMap = new HashMap<>();
                 try{
                     if(hasComment){
                         dataBaseFiedInfoMap.put("comment", resultSet.getString("Comment"));
@@ -88,13 +90,20 @@ public class AnalysisMysqlTable implements Analysis {
                     }
                 }
 
-                dataBaseFiedInfoMap.put("fieldUpKey", StringUtils.firstToUp(fieldName));
-                dataBaseFiedInfoMap.put("fieldKey", StringUtils.firstToLower(fieldName));
-                dataBaseFiedInfoMap.put("fieldDataType", Constant.JDBCTYPEMAPTOJAVATYPE.get(columnDataType.toUpperCase()));
+                dataBaseFiedInfoMap.put(Constant.GENERAT_PARAM_FIELD_FIRST_UP_KEY, StringUtils.firstToUp(fieldName));
+                dataBaseFiedInfoMap.put(Constant.GENERAT_PARAM_FIELD_KEY, StringUtils.firstToLower(fieldName));
+                String javaDataType = JDBCDataTypeEnum.getjavaTypeByJdbcType(columnDataType);
+                dataBaseFiedInfoMap.put(Constant.GENERAT_PARAM_FIELD_DATA_TYPE, javaDataType);
+                if(StringUtils.isBlank(javaDataType)){
+                    log.info("{} 没有JavaDatatype",columnDataType);
+                }
+
+                fieldDateTypeFullNameList.add(JavaDataTypeEnum.getjavaTypeFullName(dataBaseFiedInfoMap.get(Constant.GENERAT_PARAM_FIELD_DATA_TYPE)));
 
                 dataBaseFiedsList.add(dataBaseFiedInfoMap);
             }
-            modelTemplateDate.put("fieldList", dataBaseFiedsList);
+            modelTemplateDate.put(Constant.GENERAT_PARAM_FIELD_LIST, dataBaseFiedsList);
+            modelTemplateDate.put(Constant.GENERAT_PARAM_FIELD_DATA_TYPE_FULL_NAME_LIST, fieldDateTypeFullNameList);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -31,21 +31,21 @@ public class Generator {
     public Generator() {
         this.properties = new PropertiesUtils();
         String templateName = properties.getProperty("template.name");
-        init(null);
+        init(null,true);
     }
 
-    public Generator(String templateName) {
+    public Generator(String templateName, boolean removeOld) {
         this.properties = new PropertiesUtils();
-        init(templateName);
+        init(templateName,removeOld);
     }
 
     public Generator(PropertiesUtils properties) {
         this.properties = properties;
         String templateName = properties.getProperty("template.name");
-        init(templateName);
+        init(templateName,true);
     }
 
-    private void init(String templateName) {
+    private void init(String templateName, boolean removeOld) {
         try {
             if (StringUtils.isBlank(templateName)) {
                 throw new IOException("模板名不能为空");

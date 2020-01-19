@@ -3,7 +3,7 @@ package com.sai.demo.generator.analysis;
 
 import com.sai.demo.generator.annotation.GenClassBaseInfo;
 import com.sai.demo.generator.annotation.GenClassField;
-import com.sai.demo.generator.constants.Constant;
+import com.sai.demo.generator.constants.JDBCDataTypeEnum;
 import com.sai.demo.util.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -76,7 +76,7 @@ public class AnalysisClass implements Analysis {
                 String fieldName = field.getName();
                 String fieldDataType = field.getType().getSimpleName();
                 dataBaseFiedInfoMap.put("columnName", fieldName);
-                dataBaseFiedInfoMap.put("columnDataType", Constant.JAVATYPETOJDBCTYPEMAP.containsKey(fieldDataType) ? Constant.JAVATYPETOJDBCTYPEMAP.get(fieldDataType) : fieldDataType.toUpperCase());
+                dataBaseFiedInfoMap.put("columnDataType", JDBCDataTypeEnum.getJdbcType(fieldDataType));
                 fieldName = StringUtils.firstToLower(fieldName);
                 String[] fieldNameArray = fieldName.split("_");
                 if (fieldNameArray.length > 1) {
