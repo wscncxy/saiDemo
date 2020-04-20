@@ -4,6 +4,7 @@ package com.sai.demo.generator.analysis;
 import com.sai.demo.generator.constants.Constant;
 import com.sai.demo.generator.constants.JavaDataTypeEnum;
 import com.sai.demo.generator.constants.JDBCDataTypeEnum;
+import com.sai.demo.generator.constants.MybatisDataTypeEnum;
 import com.sai.demo.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,7 +81,9 @@ public class AnalysisMysqlTable implements Analysis {
                     columnDataType = columnDataType.substring(0, columnDataType.indexOf("("));
                 }
                 columnDataType = columnDataType.toUpperCase();
-                dataBaseFiedInfoMap.put("columnDataType", "TEXT".equalsIgnoreCase(columnDataType)?"VARCHAR":("DATETIME".equalsIgnoreCase(columnDataType)?"TIMESTAMP":columnDataType));
+                String mybatisDataType= MybatisDataTypeEnum.getMybatisTypeByJdbcType(columnDataType);
+                columnDataType = StringUtils.isNotBlank(mybatisDataType)?mybatisDataType:columnDataType;
+                dataBaseFiedInfoMap.put("columnDataType", columnDataType);
 
                 String fieldName = columnName;
                 String[] fieldNameArray = columnName.split("_");

@@ -30,17 +30,10 @@ public class GeneratorApplication {
  * specification_info
  */
         List<String> tableList = new ArrayList<>();
-        tableList.add("brand_info");
-        tableList.add("brand_series_info");
-        tableList.add("goods_category_info");
-        tableList.add("goods_category_relation");
-        tableList.add("goods_descript");
-        tableList.add("goods_info");
-        tableList.add("goods_main");
-        tableList.add("goods_pool");
-        tableList.add("goods_pool_relation");
-        tableList.add("goods_specification_rela");
-        tableList.add("specification_info");
+        tableList.add("news_category_info");
+        tableList.add("news_category_relation");
+        tableList.add("news_content");
+        tableList.add("news_info");
         Generator generator = new Generator("saiMVC",true);
         for (String tableName : tableList) {
             Analysis analysis = new AnalysisMysqlTable("com.sai.web.shopping",
