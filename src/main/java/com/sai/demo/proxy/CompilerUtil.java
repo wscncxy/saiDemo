@@ -1,13 +1,13 @@
 package com.sai.demo.proxy;
 
 import com.sai.demo.util.StringUtils;
-import com.sun.tools.javac.util.List;
 
 import javax.tools.*;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class CompilerUtil {
@@ -41,7 +41,7 @@ public class CompilerUtil {
             return false;
         }
 
-        List sourceList = List.from(list);
+        List sourceList = list;
         return comilterStringCode(null, null, null, null, sourceList);
     }
 
