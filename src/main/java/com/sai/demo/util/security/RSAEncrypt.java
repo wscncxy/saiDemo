@@ -1,3 +1,6 @@
+package com.sai.demo.util.security;
+
+import com.sai.demo.util.security.Base64Util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 

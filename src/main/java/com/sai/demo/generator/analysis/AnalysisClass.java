@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 根据指定Class和模版，生成文件
+ */
+
 public class AnalysisClass implements Analysis {
 
     private Class genClass;
