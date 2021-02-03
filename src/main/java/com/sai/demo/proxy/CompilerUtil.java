@@ -21,7 +21,7 @@ public class CompilerUtil {
     }
 
     public static boolean compilterStringCode(String name, String code) {
-        return comilterStringCode(null, null, null, null, List.of(new SaiStringSource(name, code)));
+        return comilterStringCode(null, null, null, null, null);
     }
 
     public static boolean compilterStringCode(Map<String, String> sourceMap) {
