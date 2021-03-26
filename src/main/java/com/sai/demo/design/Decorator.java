@@ -1,5 +1,10 @@
 package com.sai.demo.design;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 public class Decorator {
     public static void main(String[] args) {
         PriceService priceService = new BasePriceService(null);
@@ -8,6 +13,12 @@ public class Decorator {
         priceService = new CouponiscountPriceService(priceService);
     System.out.println(priceService.getPrice());
 
+    try {
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("")));
+        inputStream.read();
+    }catch (Exception e){
+
+    }
 
     }
 }
