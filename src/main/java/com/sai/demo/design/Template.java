@@ -12,7 +12,7 @@ abstract class LoanTemplate{
 
     protected abstract void loan();
 
-    public final void doLoand(){
+    public final void templateMethod(){
         checkParam();
 
         saveLoan();

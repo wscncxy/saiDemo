@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Observer {
+    public static void main(String[] args) {
+        BroadCaster<Event> broadCaster = new ConcreteBroadCaster();
+        broadCaster.registerObserver(new LocalLogListener());
+        broadCaster.registerObserver(new SendMsgListener());
+    }
 }
 
 class Event{
@@ -12,38 +17,50 @@ class Event{
 }
 
 interface EventListener<T>{
-
-    Integer order();
-
-    boolean canListen(T event);
-
     void processEvent(T event);
+}
+
+class LocalLogListener implements EventListener{
+
+    @Override
+    public void processEvent(Object event) {
+
+    }
+}
+
+class SendMsgListener implements EventListener{
+
+    @Override
+    public void processEvent(Object event) {
+
+    }
 }
 
 interface BroadCaster<T>{
 
-    void addListener(EventListener<T> eventListen);
-    void broadcast(T Event);
+    void registerObserver(EventListener<T> eventListen);
+    void removerObserver(EventListener<T> eventListen);
+    void notifyObservers(T Event);
 }
 
-class BroadCaster1 implements BroadCaster<Event>{
+class ConcreteBroadCaster implements BroadCaster<Event>{
 
     private List<EventListener<Event>> listenerList = new ArrayList<>();
 
     @Override
-    public void addListener(EventListener eventListen){
+    public void registerObserver(EventListener eventListen){
         listenerList.add(eventListen);
-        listenerList.stream().sorted((o1,o2)->{
-            return o1.order().compareTo(o2.order());
-        });
     }
 
     @Override
-    public void broadcast(Event event){
+    public void removerObserver(EventListener<Event> eventListen) {
+        listenerList.remove(eventListen);
+    }
+
+    @Override
+    public void notifyObservers(Event event){
         for(EventListener eventListener: listenerList){
-            if(eventListener.canListen(event)){
-                //do something
-            }
+            eventListener.processEvent(event);
         }
     }
 }

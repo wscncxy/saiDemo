@@ -1,7 +1,10 @@
 package com.sai.demo.design;
 
 public class Factory {
-
+    public static void main(String[] args) {
+        BizFactory bizFactory = new ConcreteBizFactory();
+        Product product = bizFactory.createBean(ConcreteProduct.class);
+    }
 }
 
 interface BizFactory {
@@ -26,8 +29,13 @@ class ConcreteBizFactory implements BizFactory {
 
 interface Product {
 
+    public String getName();
 }
 
 class ConcreteProduct implements Product {
 
+    @Override
+    public String getName() {
+        return "1";
+    }
 }

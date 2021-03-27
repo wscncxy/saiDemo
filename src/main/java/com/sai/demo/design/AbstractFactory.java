@@ -1,6 +1,16 @@
 package com.sai.demo.design;
 
 public class AbstractFactory {
+    public static void main(String[] args) {
+        ConcreteBizAbstractFactory1 factory1 = new ConcreteBizAbstractFactory1();
+        ConcreteBizAbstractFactory2 factory2 = new ConcreteBizAbstractFactory2();
+
+        factory1.createBeanProductA(ProductA.class);
+        factory1.createBeanProductB(ProductB.class);
+
+        factory2.createBeanProductA(ProductA.class);
+        factory2.createBeanProductB(ProductB.class);
+    }
 }
 
 interface BizAbstractFactory {
