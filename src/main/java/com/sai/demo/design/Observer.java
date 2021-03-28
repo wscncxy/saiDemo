@@ -12,11 +12,25 @@ public class Observer {
 }
 
 class Event{
+    //业务流出
     String flow;
-    String flowPoint;
+    //事件
+    String eventType;
+    //结果
+    String result;
+}
+
+interface FlowEventListener<T>{
+
+    //判断是否接收事件
+    boolean canListener();
+    //处理事件
+    void processEvent(T event);
+
 }
 
 interface EventListener<T>{
+
     void processEvent(T event);
 }
 
@@ -59,8 +73,10 @@ class ConcreteBroadCaster implements BroadCaster<Event>{
 
     @Override
     public void notifyObservers(Event event){
-        for(EventListener eventListener: listenerList){
-            eventListener.processEvent(event);
-        }
+//        for(EventListener eventListener: listenerList){
+//            threadPool.submit(
+//                eventListener.processEvent(event);
+//            );
+//        }
     }
 }

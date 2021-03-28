@@ -1,7 +1,7 @@
 package com.sai.demo.design;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class Iterator {
     public static void main(String[] args) {
@@ -9,5 +9,6 @@ public class Iterator {
 
         java.util.Iterator iterator =  list.iterator();
     }
+
 }
 

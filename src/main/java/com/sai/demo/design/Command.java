@@ -27,6 +27,7 @@ class ConcreteReceiver1 implements Receiver{
     }
 }
 
+
 class ConcreteReceiver2 implements Receiver{
     @Override
     public void doSomething() {

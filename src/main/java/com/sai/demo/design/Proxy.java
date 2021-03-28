@@ -1,6 +1,10 @@
 package com.sai.demo.design;
 
 public class Proxy {
+    public static void main(String[] args) {
+        ConcreteProxy proxy = new ConcreteProxy(new RealSubject());
+        proxy.request();
+    }
 }
 
 interface Subject{

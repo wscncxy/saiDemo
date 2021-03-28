@@ -1,6 +1,12 @@
 package com.sai.demo.design;
 
 public class Template {
+    public static void main(String[] args) {
+        LoanTemplate loanTemplate = new ConcreteLoan1();
+        loanTemplate.templateMethod();
+        loanTemplate = new ConcreteLoan2();
+        loanTemplate.templateMethod();
+    }
 }
 
 

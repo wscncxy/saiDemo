@@ -19,7 +19,7 @@ class Singleton2{
 
     }
 
-    public static Singleton2 getSingleton(){
+    public static Singleton2 getInstance(){
         if(signature == null){
             synchronized (Singleton2.class){
                 if(signature == null){
@@ -53,3 +53,10 @@ class Singleton3{
     }
 }
 
+
+enum Singleton4{
+    INSTANCE;
+    public void method(){
+
+    }
+}

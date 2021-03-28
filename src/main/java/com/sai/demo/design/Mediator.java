@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Mediator {
+    public static void main(String[] args) {
+        ConcreteColleague1 colleague1 = new ConcreteColleague1(new ConcreteMediator());
+        colleague1.depMethod1();
+    }
 }
 
 abstract class BizMediator {

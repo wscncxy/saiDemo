@@ -27,8 +27,6 @@ class HandlerRequest {
     public Level getRequestLevel() {
         return null;
     }
-
-    ;
 }
 
 class HandlerResponse {
@@ -94,7 +92,3 @@ class ConcreteMsgHandler3 extends MsgHandler {
         return null;
     }
 }
-
-/**
- *
- * */

@@ -1,5 +1,6 @@
 package com.sai.demo.design;
 
+import lombok.Builder;
 import lombok.Getter;
 
 public class Bridge {

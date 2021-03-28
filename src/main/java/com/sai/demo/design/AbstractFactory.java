@@ -96,3 +96,37 @@ class ConcreteProductB1 implements ProductB {
 class ConcreteProductB2 implements ProductB {
 
 }
+
+
+interface MyAbstractFactory{
+
+    void createLoanService();
+
+    void createRepayService();
+}
+
+class ZYAbstractFactory implements MyAbstractFactory{
+
+    @Override
+    public void createLoanService() {
+
+    }
+
+    @Override
+    public void createRepayService() {
+
+    }
+}
+
+class SupplierAbstractFactory implements MyAbstractFactory{
+
+    @Override
+    public void createLoanService() {
+
+    }
+
+    @Override
+    public void createRepayService() {
+
+    }
+}

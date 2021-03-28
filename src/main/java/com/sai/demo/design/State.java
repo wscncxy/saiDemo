@@ -2,8 +2,15 @@ package com.sai.demo.design;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.zookeeper.Op;
 
 public class State {
+    public static void main(String[] args) {
+        LiftContext liftContext = new LiftContext();
+        liftContext.setLiftState(new OpennigState());
+        liftContext.open();
+        liftContext.close();
+    }
 }
 
 class LiftContext {

@@ -1,6 +1,13 @@
 package com.sai.demo.design;
 
+import java.util.Random;
+
 public class Visitor {
+
+    public static void main(String[] args) {
+        Element element=ObjectStruture.createElement();
+        element.accept(new ConcreteBizVisitor());
+    }
 }
 
 interface Element{
@@ -48,5 +55,16 @@ class ConcreteBizVisitor implements BizVisitor{
     @Override
     public void visit(ConcreteEleement2 eleement) {
         eleement.doSomething();
+    }
+}
+
+class ObjectStruture {
+    public static Element createElement(){
+        Random random = new Random();
+        if(random.nextInt(100)>50){
+            return new ConcreteEleement1();
+        }else{
+            return new ConcreteEleement2();
+        }
     }
 }
