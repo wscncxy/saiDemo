@@ -1,5 +1,7 @@
 package com.sai.demo.design;
 
+import java.io.*;
+
 public class Decorator {
     public static void main(String[] args) {
         DecoratorComponent component = new ConcreteDecoratorComponent();

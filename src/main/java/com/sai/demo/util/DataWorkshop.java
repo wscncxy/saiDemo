@@ -21,7 +21,7 @@ public class DataWorkshop {
         if(userInfo!=null){
             return (HashMap)userInfo;
         }
-        //todo something
+        //todo something,这里可以结合责任链获取数据
         return new HashMap<>();
     }
 }

@@ -1,6 +1,7 @@
 package com.sai.demo.design;
 
 import lombok.Setter;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -15,6 +16,8 @@ public class ChainOfResponsibility {
         handler2.setNextMsgHandler(handler3);
 
         handler1.handlerMessage(new HandlerRequest());
+
+        RestTemplate restTemplate = new RestTemplate();
     }
 }
 
@@ -90,5 +93,19 @@ class ConcreteMsgHandler3 extends MsgHandler {
     @Override
     protected HandlerResponse process(HandlerRequest request) {
         return null;
+    }
+}
+
+class CacheData{
+    //缓存ID
+    private String cacheId;
+    //数据查询参数
+    private Object param;
+    //数据查询结果
+    private Object result;
+
+    //半自定义缓存Id
+    public void getCacheId(){
+//        return param.name+param.id;
     }
 }
