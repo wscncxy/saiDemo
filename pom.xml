@@ -24,7 +24,7 @@
     <maven.compiler.target>14</maven.compiler.target>
     <logback.version>1.2.3</logback.version>
     <project.name>demo</project.name>
-    <spring.boot.version>2.4.2</spring.boot.version>
+    <spring.boot.version>2.5.12</spring.boot.version>
     <hadoop.version>2.9.2</hadoop.version>
   </properties>
 
