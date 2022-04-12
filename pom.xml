@@ -25,7 +25,7 @@
     <logback.version>1.2.3</logback.version>
     <project.name>demo</project.name>
     <spring.boot.version>2.4.2</spring.boot.version>
-    <hadoop.version>2.9.2</hadoop.version>
+    <hadoop.version>3.2.3</hadoop.version>
   </properties>
 
   <dependencies>
